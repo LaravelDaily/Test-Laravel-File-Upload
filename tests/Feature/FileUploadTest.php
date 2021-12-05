@@ -28,4 +28,21 @@ class FileUploadTest extends TestCase
             'logo' => $filename
         ]);
     }
+
+    public function test_file_size_validation()
+    {
+        Storage::fake('logos');
+
+        $response = $this->post('projects', [
+            'name' => 'Some name',
+            'logo' => UploadedFile::fake()->create('logo.jpg', 2000)
+        ]);
+        $response->assertInvalid();
+
+        $response = $this->post('projects', [
+            'name' => 'Some name',
+            'logo' => UploadedFile::fake()->create('logo.jpg', 500)
+        ]);
+        $response->assertValid();
+    }
 }

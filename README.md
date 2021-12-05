@@ -32,3 +32,11 @@ In `app/Http/Controllers/ProjectController.php` file, in the `store()` method, g
 Test method `test_original_filename_upload()`.
 
 ---
+
+## Task 2. File Size Validation.
+
+In `app/Http/Controllers/ProjectController.php` file, in the `store()` method, put in the validation rule so "logo" file would be MAX 1 megabyte
+
+Test method `test_file_size_validation()`.
+
+---
