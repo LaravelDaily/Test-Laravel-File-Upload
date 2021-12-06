@@ -3,10 +3,12 @@
 namespace Tests\Feature;
 
 use App\Models\House;
+use App\Models\Office;
 use App\Models\Project;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class FileUploadTest extends TestCase
@@ -73,5 +75,22 @@ class FileUploadTest extends TestCase
         $response = $this->get('houses/download/' . $house->id);
         $response->assertStatus(200);
         $response->assertDownload(str_replace('houses/', '', $house->photo));
+    }
+
+    public function test_public_file_show()
+    {
+        $filename = Str::random(8) . '.jpg';
+
+        $this->post('offices', [
+            'name' => 'Some name',
+            'photo' => UploadedFile::fake()->image($filename)
+        ]);
+        $office = Office::first();
+
+        $this->assertTrue(Storage::disk('public')->exists('offices/' . $filename));
+
+        $response = $this->get('offices/' . $office->id);
+        $response->assertStatus(200);
+        $response->assertSee(public_path('offices/' . $filename));
     }
 }

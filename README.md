@@ -56,3 +56,11 @@ In `app/Http/Controllers/HouseController.php` file, in the `download()` method, 
 Test method `test_download_uploaded_file()`.
 
 ---
+
+## Task 5. Upload File to Public
+
+In `app/Http/Controllers/OfficeController.php` file, in the `store()` method, upload the file to the "public" disk, to its "offices" folder. The test asserts that the file exists in the respected location, and is shown in the offices/show.blade.php
+
+Test method `test_public_file_show()`.
+
+---
