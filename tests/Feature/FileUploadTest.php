@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\House;
 use App\Models\Project;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -14,7 +15,6 @@ class FileUploadTest extends TestCase
 
     public function test_original_filename_upload()
     {
-        Storage::fake('logos');
         $filename = 'logo.jpg';
 
         $response = $this->post('projects', [
@@ -31,8 +31,6 @@ class FileUploadTest extends TestCase
 
     public function test_file_size_validation()
     {
-        Storage::fake('logos');
-
         $response = $this->post('projects', [
             'name' => 'Some name',
             'logo' => UploadedFile::fake()->create('logo.jpg', 2000)
@@ -44,5 +42,23 @@ class FileUploadTest extends TestCase
             'logo' => UploadedFile::fake()->create('logo.jpg', 500)
         ]);
         $response->assertValid();
+    }
+
+    public function test_update_file_remove_old_one()
+    {
+        $response = $this->post('houses', [
+            'name' => 'Some name',
+            'photo' => UploadedFile::fake()->image('photo.jpg')
+        ]);
+        $response->assertStatus(200);
+        $house = House::first();
+        $this->assertTrue(Storage::exists($house->photo));
+
+        $response = $this->put('houses/1', [
+            'name' => 'Some name',
+            'photo' => UploadedFile::fake()->image('photo2.jpg')
+        ]);
+        $response->assertStatus(200);
+        $this->assertFalse(Storage::exists($house->photo));
     }
 }

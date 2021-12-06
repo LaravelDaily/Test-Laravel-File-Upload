@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::post('projects', [\App\Http\Controllers\ProjectController::class, 'store']);
+Route::resource('houses', \App\Http\Controllers\HouseController::class);

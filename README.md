@@ -40,3 +40,11 @@ In `app/Http/Controllers/ProjectController.php` file, in the `store()` method, p
 Test method `test_file_size_validation()`.
 
 ---
+
+## Task 3. Update: Delete Old File
+
+In `app/Http/Controllers/HouseController.php` file, in the `update()` method, we upload the new file but don't delete the old one. Help to clean up the disk and delete the old file.
+
+Test method `test_update_file_remove_old_one()`.
+
+---
