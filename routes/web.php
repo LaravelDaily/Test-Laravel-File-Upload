@@ -23,3 +23,7 @@ Route::get('houses/download/{house}', [\App\Http\Controllers\HouseController::cl
 Route::resource('houses', \App\Http\Controllers\HouseController::class);
 
 Route::resource('offices', \App\Http\Controllers\OfficeController::class);
+
+Route::post('shops', [\App\Http\Controllers\ShopController::class, 'store']);
+
+Route::resource('companies', \App\Http\Controllers\CompanyController::class);

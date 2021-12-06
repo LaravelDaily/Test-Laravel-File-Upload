@@ -64,3 +64,20 @@ In `app/Http/Controllers/OfficeController.php` file, in the `store()` method, up
 Test method `test_public_file_show()`.
 
 ---
+
+## Task 6. Resize Image with Intervention/Image
+
+In `app/Http/Controllers/ShopController.php` file, in the `store()` method, the uploaded image file needs to be resized to 500x500 and stored in /storage/app/shops/resized-$filename. Use intervention/image package, it's already pre-installed for you.
+
+Test method `test_upload_resize()`.
+
+---
+
+## Task 7. Spatie Media Library
+
+In `app/Http/Controllers/CompanyController.php` file, in the `show()` method, use Spatie Media Library package methods to get the full URL of the file that was just uploaded.
+
+Test method `test_spatie_media_library()`.
+
+---
+
