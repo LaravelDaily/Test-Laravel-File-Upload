@@ -48,3 +48,11 @@ In `app/Http/Controllers/HouseController.php` file, in the `update()` method, we
 Test method `test_update_file_remove_old_one()`.
 
 ---
+
+## Task 4. Download the Uploaded File
+
+In `app/Http/Controllers/HouseController.php` file, in the `download()` method, return the response that would automatically download the file with `$house->photo` filename from `storage/app/houses` folder.
+
+Test method `test_download_uploaded_file()`.
+
+---

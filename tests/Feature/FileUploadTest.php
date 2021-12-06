@@ -54,11 +54,24 @@ class FileUploadTest extends TestCase
         $house = House::first();
         $this->assertTrue(Storage::exists($house->photo));
 
-        $response = $this->put('houses/1', [
+        $response = $this->put('houses/' . $house->id, [
             'name' => 'Some name',
             'photo' => UploadedFile::fake()->image('photo2.jpg')
         ]);
         $response->assertStatus(200);
         $this->assertFalse(Storage::exists($house->photo));
+    }
+
+    public function test_download_uploaded_file()
+    {
+        $this->post('houses', [
+            'name' => 'Some name',
+            'photo' => UploadedFile::fake()->image('photo.jpg')
+        ]);
+        $house = House::first();
+
+        $response = $this->get('houses/download/' . $house->id);
+        $response->assertStatus(200);
+        $response->assertDownload(str_replace('houses/', '', $house->photo));
     }
 }

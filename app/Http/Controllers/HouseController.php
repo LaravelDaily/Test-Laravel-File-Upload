@@ -33,4 +33,10 @@ class HouseController extends Controller
 
         return 'Success';
     }
+
+    public function download(House $house)
+    {
+        // TASK: Return the $house->photo file from "storage/app/houses" folder
+        // for download in browser
+    }
 }
