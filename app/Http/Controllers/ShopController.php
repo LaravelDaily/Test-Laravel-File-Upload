@@ -26,12 +26,12 @@ class ShopController extends Controller
             // $img = Image::make($request->file('photo')->getRealPath()) //its also not working
             // $img = Image::make($request->photo) //its also not working
             // $img = Image::make($path) //its also not working
-            $img = Image::make(Storage::url($path)) //its also not working
+            Image::make(Storage::path($path)) //its also not working
                 ->resize(500, 500, function ($constraint) {
                     $constraint->aspectRatio();
                 })
                 // ->fit(500)
-                ->save(storage_path('shops/'.$filename));
+                ->save(Storage::path('shops/resized-' . $filename));
             // $img->resize(500, 500);
             // $img->save(public_path('shops').'/resized-'.$filename);
             // Storage::disk(config('filesystem.default'))->put('shops/resized'.$filename, $img);
