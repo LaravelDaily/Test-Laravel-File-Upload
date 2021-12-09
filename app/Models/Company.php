@@ -12,4 +12,5 @@ class Company extends Model implements HasMedia
     use HasFactory, InteractsWithMedia;
 
     protected $fillable = ['name'];
+
 }

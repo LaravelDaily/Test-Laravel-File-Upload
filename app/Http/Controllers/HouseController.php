@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\House;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class HouseController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request): string
     {
         $filename = $request->file('photo')->store('houses');
 
@@ -20,11 +21,12 @@ class HouseController extends Controller
         return 'Success';
     }
 
-    public function update(Request $request, House $house)
+    public function update(Request $request, House $house): string
     {
         $filename = $request->file('photo')->store('houses');
 
         // TASK: Delete the old file from the storage
+        Storage::delete($house->photo);
 
         $house->update([
             'name' => $request->name,
@@ -34,9 +36,10 @@ class HouseController extends Controller
         return 'Success';
     }
 
-    public function download(House $house)
+    public function download(House $house): StreamedResponse
     {
         // TASK: Return the $house->photo file from "storage/app/houses" folder
         // for download in browser
+        return Storage::download($house->photo);
     }
 }
