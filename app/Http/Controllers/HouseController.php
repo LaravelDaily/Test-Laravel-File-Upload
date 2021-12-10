@@ -26,10 +26,15 @@ class HouseController extends Controller
 
         // TASK: Delete the old file from the storage
 
-        $house->update([
-            'name' => $request->name,
-            'photo' => $filename,
-        ]);
+        if ($request->hasFile('photo')) {
+
+            Storage::delete($house->photo);
+
+            $house->update([
+                'name' => $request->name,
+                'photo' => $filename,
+            ]);
+        }
 
         return 'Success';
     }
@@ -38,5 +43,7 @@ class HouseController extends Controller
     {
         // TASK: Return the $house->photo file from "storage/app/houses" folder
         // for download in browser
+
+        return Storage::download($house->photo);
     }
 }
