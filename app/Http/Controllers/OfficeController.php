@@ -4,19 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\Office;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class OfficeController extends Controller
 {
     public function store(Request $request)
     {
-        $filename = $request->file('photo')->getClientOriginalName();
+        $image = $request->photo->storePubliclyAs(
+            'offices',
+            $fileName = request()->file('photo')->getClientOriginalName(),
+            'public'
+        );
 
-        // TASK: Upload the file "photo" so it would be written as
-        //   storage/app/public/offices/[original_filename]
+        if (!$image) {
+            return 'fail';
+        }
 
         Office::create([
             'name' => $request->name,
-            'photo' => $filename,
+            'photo' => $fileName,
         ]);
 
         return 'Success';
@@ -26,5 +32,4 @@ class OfficeController extends Controller
     {
         return view('offices.show', compact('office'));
     }
-
 }
