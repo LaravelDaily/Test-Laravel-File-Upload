@@ -1,0 +1,1371 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Your super  ApplicationAPI",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": " Customer sign-in",
+                "description": "Login by email, password",
+                "operationId": "CustomerAuthLogin",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "ally.hyatt@example.org"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Returns Customer with login token",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "user": {
+                                                    "id": "1",
+                                                    "username": "Nigel Terry",
+                                                    "phone_number": "713-702-5801",
+                                                    "status_id": "1",
+                                                    "created_at": "2021-08-29T17:43:26.000000Z"
+                                                },
+                                                "token": "6|EMZRT1UKwoUMtfbqUGn1AS6IjrDAFCdJeq0KTUZm"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Email and Password are required",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "message": "The given data was invalid.",
+                                                "errors": {
+                                                    "email": "The email field is required.",
+                                                    "password": "The password field is required."
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Wrong email or password",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": "These credentials do not match our records."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/sign-up": {
+            "post": {
+                "tags": [
+                    "Create Account"
+                ],
+                "summary": "Customer Registration",
+                "description": "Customer account register",
+                "operationId": "CustomertReg",
+                "requestBody": {
+                    "description": "Pass customer data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "username",
+                                    "email",
+                                    "password",
+                                    "password_confirmation",
+                                    "phone_number"
+                                ],
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "testCustomer"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "testCustomer@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    },
+                                    "phone_number": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "00971 55 876 3458"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Returns login token",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "access_token": "10|9jYZIV59dCRV0BiIobmaIzVemd92QTDSHgy4cRO2",
+                                                "token_type": "Bearer"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Required Fields",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "message": "The given data was invalid.",
+                                                "errors": {
+                                                    "username": "The username field is required.",
+                                                    "email": "The email field is required.",
+                                                    "password": "The password field is required.",
+                                                    "phone_number": "The phone_number field is required."
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Eamil or username already been taken",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "message": "The given data was invalid.",
+                                                "error": {
+                                                    "username": "The username has already been taken",
+                                                    "email": "The email has already been taken."
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/restaurant_login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Restaurant Sign-in",
+                "description": "Login by email, password",
+                "operationId": "RestaurantAuthLogin",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "fireman@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Returns Customer with login token",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "user": {
+                                                    "id": "1",
+                                                    "account_name": "Nigel Terry",
+                                                    "0": "NigelTerry@gmail.com",
+                                                    "phone_number": "713-702-5801",
+                                                    "status_id": "1",
+                                                    "created_at": "2021-08-29T17:43:26.000000Z"
+                                                },
+                                                "token": "6|EMZRT1UKwoUMtfbqUGn1AS6IjrDAFCdJeq0KTUZm"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Email and Password are required",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "message": "The given data was invalid.",
+                                                "errors": {
+                                                    "email": "The email field is required.",
+                                                    "password": "The password field is required."
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Wrong email or password",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": "These credentials do not match our records."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/restaurant_reg": {
+            "post": {
+                "tags": [
+                    "Create Account"
+                ],
+                "summary": "Restaurant Registration",
+                "description": "Restaurant account register",
+                "operationId": "RestaurantReg",
+                "requestBody": {
+                    "description": "Pass restaurant data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "restaurantName",
+                                    "email",
+                                    "password",
+                                    "password_confirmation",
+                                    "phone_number"
+                                ],
+                                "properties": {
+                                    "restaurantName": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "fire man"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "fireman@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    },
+                                    "phone_number": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "00971 55 876 3458"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Returns login token",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "access_token": "8|u93wYup1qclBKRS3sbIKe0TnhT1nEXmTeAyxuCYA",
+                                                "token_type": "Bearer"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Required Fields",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "message": "The given data was invalid.",
+                                                "errors": {
+                                                    "restaurantName": "The restaurantName field is required.",
+                                                    "email": "The email field is required.",
+                                                    "password": "The password field is required.",
+                                                    "phone_number": "The phone_number field is required."
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Eamil or Restaurant name already been taken",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "message": "The given data was invalid.",
+                                                "error": {
+                                                    "restaurantName": "The restaurant name has already been taken.",
+                                                    "email": "The restaurant name has already been taken."
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/check_email": {
+            "post": {
+                "tags": [
+                    "check email and mobile number"
+                ],
+                "summary": "Check Email",
+                "description": "Check if the eamil has already been taken",
+                "operationId": "CheckEmail",
+                "requestBody": {
+                    "description": "Pass email address",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "fireman@gmail.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "returns email is valid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "success": "true",
+                                                "message": "the email is valid"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Required Fields",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "message": "The given data was invalid.",
+                                                "errors": {
+                                                    "email": "The email field is required."
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Eamil has already been taken",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "message": "The given data was invalid.",
+                                                "error": {
+                                                    "email": "The email has already been taken."
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/check_phone_number": {
+            "post": {
+                "tags": [
+                    "check email and mobile number"
+                ],
+                "summary": "Check phone number",
+                "description": "Check if the phone number has already been taken",
+                "operationId": "CheckNumber",
+                "requestBody": {
+                    "description": "Pass phone number",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "phone_number"
+                                ],
+                                "properties": {
+                                    "phone_number": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "00971 55 876 3458"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "returns number is valid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "success": "true",
+                                                "message": "the phone_number is valid"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Required Fields",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "message": "The given data was invalid.",
+                                                "errors": {
+                                                    "email": "The phone_number field is required."
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "phone_number has already been taken",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "message": "The given data was invalid.",
+                                                "error": {
+                                                    "phone_number": "The phone_number has already been taken."
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/validate-coupon": {
+            "post": {
+                "tags": [
+                    "Coupon"
+                ],
+                "summary": "Check coupon",
+                "description": "Check if the coupon is valid",
+                "operationId": "CheckCoupon",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "has_coupon",
+                                    "coupon_value",
+                                    "source_id"
+                                ],
+                                "properties": {
+                                    "has_coupon": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "1"
+                                    },
+                                    "coupon_value": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "#4444"
+                                    },
+                                    "source_id": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "returns the valid coupon with id",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "status": true,
+                                                "msg": "successfully",
+                                                "ret_data": [
+                                                    1
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Required Fields",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "result": false,
+                                                "message": [
+                                                    "The has coupon field is required.",
+                                                    "The coupon value field is required.",
+                                                    "The source id field is required."
+                                                ],
+                                                "ret_data": []
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Coupon has already been taken",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "status": false,
+                                                "msg": "This code has already been used"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Inactive restaurant account",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "status": false,
+                                                "msg": "Restaurant account  is  inactive"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "User account is inactive",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "status": false,
+                                                "msg": "Your account is inactive"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "300": {
+                        "description": "the coupon is inactive",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "status": false,
+                                                "msg": "coupon code is  inactive"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "301": {
+                        "description": "check the entred code",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "status": false,
+                                                "msg": "please check coupon code"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/get-areas": {
+            "post": {
+                "tags": [
+                    "General"
+                ],
+                "summary": "Get areas",
+                "description": "Get all the available areas",
+                "operationId": "GetAreas",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "source_id",
+                                    "city_id"
+                                ],
+                                "properties": {
+                                    "source_id": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "1"
+                                    },
+                                    "city_id": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "returns all areas in the requested city",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "status": true,
+                                                "msg": "successfully",
+                                                "ret_data": [
+                                                    {
+                                                        "id": 1,
+                                                        "area_name": "Arnous",
+                                                        "city_id": 1,
+                                                        "created_at": "2021-08-24 13:07:44"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Required Fields",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "result": false,
+                                                "msg": [
+                                                    "The source id field is required.",
+                                                    "The city id field is required."
+                                                ],
+                                                "ret_data": []
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "420": {
+                        "description": "Invalid city id",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "result": false,
+                                                "msg": [
+                                                    "invalid city id"
+                                                ],
+                                                "ret_data": []
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Customer account is inactive",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "status": false,
+                                                "msg": [
+                                                    "Your account is inactive"
+                                                ],
+                                                "ret_data": []
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/get-cities": {
+            "post": {
+                "tags": [
+                    "General"
+                ],
+                "summary": "Get cities",
+                "description": "Get all the available cities",
+                "operationId": "GetCities",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "source_id",
+                                    "county_id"
+                                ],
+                                "properties": {
+                                    "source_id": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "1"
+                                    },
+                                    "county_id": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "returns all cities in the requested country",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "status": true,
+                                                "msg": "successfully",
+                                                "ret_data": [
+                                                    {
+                                                        "id": 1,
+                                                        "city_name": "damascus",
+                                                        "country_id": 1,
+                                                        "created_at": "2021-08-24 13:07:19"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Required Fields",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "result": false,
+                                                "msg": [
+                                                    "The source id field is required.",
+                                                    "The country id field is required."
+                                                ],
+                                                "ret_data": []
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "420": {
+                        "description": "Invalid countr id",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "result": false,
+                                                "msg": [
+                                                    "invalid country id"
+                                                ],
+                                                "ret_data": []
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Customer account is inactive",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "status": false,
+                                                "msg": [
+                                                    "Your account is inactive"
+                                                ],
+                                                "ret_data": []
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/get-countries": {
+            "post": {
+                "tags": [
+                    "General"
+                ],
+                "summary": "Get countries",
+                "description": "Get all the available countries",
+                "operationId": "GetContries",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "source_id",
+                                    "county_id"
+                                ],
+                                "properties": {
+                                    "source_id": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "returns all countries",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "status": true,
+                                                "msg": "successfully",
+                                                "ret_data": [
+                                                    {
+                                                        "id": 1,
+                                                        "country_name": "syria",
+                                                        "created_at": "2021-08-24 13:07:05"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Required Fields",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "result": false,
+                                                "msg": [
+                                                    "The source id field is required."
+                                                ],
+                                                "ret_data": []
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Customer account is inactive",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "status": false,
+                                                "msg": [
+                                                    "Your account is inactive"
+                                                ],
+                                                "ret_data": []
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/get-items": {
+            "post": {
+                "tags": [
+                    "Items"
+                ],
+                "summary": "Get items",
+                "description": "Get all item of the requested restaurant",
+                "operationId": "GetItems",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "source_id",
+                                    "restaurant_id"
+                                ],
+                                "properties": {
+                                    "source_id": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "1"
+                                    },
+                                    "restaurant_id": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "returns all countries",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "status": true,
+                                                "msg": "successfully",
+                                                "ret_data": [
+                                                    {
+                                                        "id": 1,
+                                                        "country_name": "syria",
+                                                        "created_at": "2021-08-24 13:07:05"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Required Fields",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "result": false,
+                                                "msg": [
+                                                    "The source id field is required.",
+                                                    "The restaurant id field is required."
+                                                ],
+                                                "ret_data": []
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Customer account is inactive",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "result": {
+                                            "type": "object",
+                                            "example": {
+                                                "status": false,
+                                                "msg": [
+                                                    "Your account is inactive"
+                                                ],
+                                                "ret_data": []
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "responses": {
+            "407": {
+                "description": "Restaurant is inactive",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "result": {
+                                    "type": "object",
+                                    "example": {
+                                        "status": false,
+                                        "msg": [
+                                            "Restaurant account  is  inactive"
+                                        ],
+                                        "ret_data": []
+                                    }
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "apiAuth": {
+                "type": "http",
+                "description": "Login with email and password to get the authentication token",
+                "name": "Token based Based",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
