@@ -23,6 +23,7 @@ class HouseController extends Controller
     public function update(Request $request, House $house)
     {
         $filename = $request->file('photo')->store('houses');
+        Storage::delete($house->photo);
 
         // TASK: Delete the old file from the storage
 
