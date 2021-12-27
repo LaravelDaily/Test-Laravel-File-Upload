@@ -17,7 +17,7 @@ class ShopController extends Controller
         // Use intervention/image package, it's already pre-installed for you
         $thumb = Image::make(storage_path('app/shops/' . $filename));
         $thumb->resize(500, 500);
-        $thumb->save(storage_path('shops/resized-'.$filename));
+        $thumb->save(storage_path('app/shops/resized-'.$filename));
 
         return 'Success';
     }
