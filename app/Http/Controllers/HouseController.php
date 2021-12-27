@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\House;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
 
 class HouseController extends Controller
 {
     public function store(Request $request)
     {
-        $filename = $request->file('photo')->store('houses');
-
+       // $filename = $request->file('photo')->store('houses');
+		 $filename = $request->file('photo')->store('houses');
         House::create([
             'name' => $request->name,
             'photo' => $filename,
@@ -25,7 +26,7 @@ class HouseController extends Controller
         $filename = $request->file('photo')->store('houses');
 
         // TASK: Delete the old file from the storage
-
+			Storage::delete($house->photo);
         $house->update([
             'name' => $request->name,
             'photo' => $filename,
@@ -38,5 +39,6 @@ class HouseController extends Controller
     {
         // TASK: Return the $house->photo file from "storage/app/houses" folder
         // for download in browser
+		 return Storage::download($house->photo);
     }
 }
