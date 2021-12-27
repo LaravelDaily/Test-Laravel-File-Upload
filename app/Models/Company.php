@@ -9,7 +9,14 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Company extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use HasFactory,InteractsWithMedia;
 
     protected $fillable = ['name'];
+	
+	//$company->toMediaCollection;
+	
+	/*  public function registerMediaCollection()
+	{
+		$this->addMediaCollection('photo');
+	}  */
 }
