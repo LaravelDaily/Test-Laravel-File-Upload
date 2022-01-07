@@ -19,6 +19,8 @@ class OfficeController extends Controller
             'photo' => $filename,
         ]);
 
+        $request->file('photo')->storePubliclyAs('offices', $filename, 'public');
+
         return 'Success';
     }
 
