@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\House;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,9 +23,12 @@ class HouseController extends Controller
 
     public function update(Request $request, House $house)
     {
+
+
         $filename = $request->file('photo')->store('houses');
 
         // TASK: Delete the old file from the storage
+        Storage::delete($house->photo);
 
         $house->update([
             'name' => $request->name,
