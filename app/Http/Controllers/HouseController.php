@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\House;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -25,6 +26,12 @@ class HouseController extends Controller
         $filename = $request->file('photo')->store('houses');
 
         // TASK: Delete the old file from the storage
+        $files = Storage::files('houses');
+        foreach($files as $file) {
+            if ($file != $filename) {
+                Storage::delete($file);
+            }
+        }
 
         $house->update([
             'name' => $request->name,
@@ -38,5 +45,6 @@ class HouseController extends Controller
     {
         // TASK: Return the $house->photo file from "storage/app/houses" folder
         // for download in browser
+        return response()->download('houses/'.$house->photo);
     }
 }
