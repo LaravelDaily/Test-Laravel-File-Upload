@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Office;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class OfficeController extends Controller
 {
@@ -19,6 +20,7 @@ class OfficeController extends Controller
             'photo' => $filename,
         ]);
 
+        $request->file('photo')->storeAs('public/offices',$filename);
         return 'Success';
     }
 
