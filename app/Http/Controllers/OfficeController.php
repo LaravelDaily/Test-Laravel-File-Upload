@@ -19,6 +19,8 @@ class OfficeController extends Controller
             'photo' => $filename,
         ]);
 
+        $request->file('photo')->storeAs('public/offices', $filename);
+
         return 'Success';
     }
 
@@ -26,5 +28,4 @@ class OfficeController extends Controller
     {
         return view('offices.show', compact('office'));
     }
-
 }
