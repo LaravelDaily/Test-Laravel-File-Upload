@@ -20,7 +20,7 @@ class ShopController extends Controller
         // Use intervention/image package, it's already pre-installed for you
        $img = Image::make(Storage::get($path));
        $img->resize(500, 500);
-       $img->save(storage_path().'\app\shops\resized-'.$filename);
+       $img->save(storage_path().'/app/shops/resized-'.$filename);
 
         return 'Success';
     }
