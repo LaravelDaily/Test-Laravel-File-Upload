@@ -113,6 +113,7 @@ class FileUploadTest extends TestCase
 
     public function test_spatie_media_library()
     {
+        $this->withoutExceptionHandling();
         $filename = Str::random(8) . '.jpg';
 
         $response = $this->post('companies', [
