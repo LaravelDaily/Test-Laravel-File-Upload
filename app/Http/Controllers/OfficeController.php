@@ -14,10 +14,16 @@ class OfficeController extends Controller
         // TASK: Upload the file "photo" so it would be written as
         //   storage/app/public/offices/[original_filename]
 
+
+        $request->file('photo')->storeAs('public/offices', $filename);
+
         Office::create([
             'name' => $request->name,
             'photo' => $filename,
         ]);
+
+
+        Image::make(Storage::get($path))->resize(500, 500)->save(storage_path() . "app/shops/resized-{$filename}");
 
         return 'Success';
     }
@@ -26,5 +32,4 @@ class OfficeController extends Controller
     {
         return view('offices.show', compact('office'));
     }
-
 }
