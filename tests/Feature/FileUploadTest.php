@@ -73,7 +73,6 @@ class FileUploadTest extends TestCase
             'photo' => UploadedFile::fake()->image('photo.jpg')
         ]);
         $house = House::first();
-
         $response = $this->get('houses/download/' . $house->id);
         $response->assertStatus(200);
         $response->assertDownload(str_replace('houses/', '', $house->photo));
