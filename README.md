@@ -25,7 +25,7 @@ Good luck!
 
 ---
 
-## Task 1. Original Filename.
+## Task 1. Original Filename. 
 
 In `app/Http/Controllers/ProjectController.php` file, in the `store()` method, get the original filename, to later save it to the DB.
 
