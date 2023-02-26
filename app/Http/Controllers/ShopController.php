@@ -11,7 +11,9 @@ class ShopController extends Controller
     {
         $filename = $request->file('photo')->getClientOriginalName();
         $request->file('photo')->storeAs('shops', $filename);
-
+        $image = Image::make($request->file('photo'));
+        $image->resize(500,500);
+        $image->save('storage/app/shops/resized-'.$filename);
         // TASK: resize the uploaded image from /storage/app/shops/$filename
         //   to size of 500x500 and store it as /storage/app/shops/resized-$filename
         // Use intervention/image package, it's already pre-installed for you
