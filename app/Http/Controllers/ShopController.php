@@ -16,6 +16,11 @@ class ShopController extends Controller
         //   to size of 500x500 and store it as /storage/app/shops/resized-$filename
         // Use intervention/image package, it's already pre-installed for you
 
+        $image = Image::make(storage_path('app/shops/' . $filename));
+        $image->resize(500, 500);
+        $image->save(storage_path('app/shops/resized-' . $filename));
+
+
         return 'Success';
     }
 }
