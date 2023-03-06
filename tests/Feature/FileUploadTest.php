@@ -20,7 +20,7 @@ class FileUploadTest extends TestCase
     public function test_original_filename_upload()
     {
         $filename = 'logo.jpg';
-
+        
         $response = $this->post('projects', [
             'name' => 'Some name',
             'logo' => UploadedFile::fake()->image($filename)
