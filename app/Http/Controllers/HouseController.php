@@ -8,35 +8,37 @@ use Illuminate\Support\Facades\Storage;
 
 class HouseController extends Controller
 {
-    public function store(Request $request)
-    {
-        $filename = $request->file('photo')->store('houses');
+	public function store(Request $request)
+	{
+		$filename = $request->file('photo')->store('houses');
 
-        House::create([
-            'name' => $request->name,
-            'photo' => $filename,
-        ]);
+		House::create([
+			'name' => $request->name,
+			'photo' => $filename,
+		]);
 
-        return 'Success';
-    }
+		return 'Success';
+	}
 
-    public function update(Request $request, House $house)
-    {
-        $filename = $request->file('photo')->store('houses');
+	public function update(Request $request, House $house)
+	{
+		$filename = $request->file('photo')->store('houses');
 
-        // TASK: Delete the old file from the storage
+		// TASK: Delete the old file from the storage
+		Storage::delete($house->photo);
 
-        $house->update([
-            'name' => $request->name,
-            'photo' => $filename,
-        ]);
+		$house->update([
+			'name' => $request->name,
+			'photo' => $filename,
+		]);
 
-        return 'Success';
-    }
+		return 'Success';
+	}
 
-    public function download(House $house)
-    {
-        // TASK: Return the $house->photo file from "storage/app/houses" folder
-        // for download in browser
-    }
+	public function download(House $house)
+	{
+		// TASK: Return the $house->photo file from "storage/app/houses" folder
+		// for download in browser
+		return Storage::download($house->photo);
+	}
 }
