@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5986f4b511cd9b94b42fa514e7f64489",
+    "content-hash": "5664c35c6d94f37c911c6f8ebc780fbd",
     "packages": [
         {
             "name": "brick/math",
@@ -3358,16 +3358,16 @@
         },
         {
             "name": "spatie/laravel-medialibrary",
-            "version": "10.7.11",
+            "version": "10.7.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-medialibrary.git",
-                "reference": "a6d562d2226c2b339db8299a3a02bacd031edabf"
+                "reference": "a992f2505f37abc49b0914c34d01a9dc7543cae1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/a6d562d2226c2b339db8299a3a02bacd031edabf",
-                "reference": "a6d562d2226c2b339db8299a3a02bacd031edabf",
+                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/a992f2505f37abc49b0914c34d01a9dc7543cae1",
+                "reference": "a992f2505f37abc49b0914c34d01a9dc7543cae1",
                 "shasum": ""
             },
             "require": {
@@ -3375,6 +3375,7 @@
                 "ext-fileinfo": "*",
                 "ext-json": "*",
                 "illuminate/bus": "^9.18|^10.0",
+                "illuminate/conditionable": "9.18|^10.0",
                 "illuminate/console": "^9.18|^10.0",
                 "illuminate/database": "^9.18|^10.0",
                 "illuminate/pipeline": "^9.18|^10.0",
@@ -3450,7 +3451,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-medialibrary/issues",
-                "source": "https://github.com/spatie/laravel-medialibrary/tree/10.7.11"
+                "source": "https://github.com/spatie/laravel-medialibrary/tree/10.7.13"
             },
             "funding": [
                 {
@@ -3462,7 +3463,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-17T08:44:20+00:00"
+            "time": "2023-03-06T11:26:25+00:00"
         },
         {
             "name": "spatie/temporary-directory",
