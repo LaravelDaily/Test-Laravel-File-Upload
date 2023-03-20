@@ -122,7 +122,7 @@ class FileUploadTest extends TestCase
         $response->assertStatus(200);
 
         $company = Company::first();
-        $response = $this->get('companies/' . $company->id);
+        $response = $this->get('companies/' . $company->id)->dump();
         $response->assertStatus(200);
         $response->assertSee('storage/' . $company->id . '/' . $filename);
     }
