@@ -13,7 +13,7 @@ class OfficeController extends Controller
 
         // TASK: Upload the file "photo" so it would be written as
         //   storage/app/public/offices/[original_filename]
-        $request->file('photo')->storeAs('storage/app/public/offices', $filename, 'public');
+        Storage::putFileAs('public/offices', $filename, $filename);
 
         Office::create([
             'name' => $request->name,
