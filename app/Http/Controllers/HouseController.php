@@ -22,21 +22,25 @@ class HouseController extends Controller
 
     public function update(Request $request, House $house)
     {
-        $filename = $request->file('photo')->store('houses');
 
+        $filename = $request->file('photo')->store('houses');
+        $originalPhotoPath = $house->photo;
         // TASK: Delete the old file from the storage
 
         $house->update([
             'name' => $request->name,
             'photo' => $filename,
         ]);
-
+        Storage::delete($originalPhotoPath);
         return 'Success';
+
     }
 
     public function download(House $house)
     {
         // TASK: Return the $house->photo file from "storage/app/houses" folder
         // for download in browser
+
+        return response()->download("storage/app/".$house->photo);
     }
 }
