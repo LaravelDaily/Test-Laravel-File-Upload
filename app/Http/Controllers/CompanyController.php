@@ -20,7 +20,11 @@ class CompanyController extends Controller
     public function show(Company $company)
     {
         // TASK: retrieve the full URL to the uploaded photo file, using Spatie Media Library
-        $photo = '???';
+
+
+//        $photo = $company->getFirstMediaUrl();
+
+        $photo = $company->getFirstMedia('companies')->getFullUrl();
 
         return view('companies.show', compact('company', 'photo'));
     }
