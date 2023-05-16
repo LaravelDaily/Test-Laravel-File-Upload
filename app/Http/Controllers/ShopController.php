@@ -9,21 +9,15 @@ class ShopController extends Controller
 {
     public function store(Request $request)
     {
-        $photo = $request->file('photo');
-        $filename = $photo->getClientOriginalName();
-        $resizedPhotoName = 'resized-' . $filname;
+        $filename = $request->file('photo')->getClientOriginalName();
 
-        $photo->storeAs('shops', $filename);
-
+        $request->file('photo')->storeAs('shops', $filename);
         // TASK: resize the uploaded image from /storage/app/shops/$filename
         //   to size of 500x500 and store it as /storage/app/shops/resized-$filename
         // Use intervention/image package, it's already pre-installed for you
 
-        $resizedPhoto = Image::make(storage_path('app/shops/' . $filename))->fit(500, 500);
-
-        $resizedPhoto->save(storage_path('app/shops/' . $resizedPhotoName));
-
-        $resizedPhoto->storeAs('shops', $resizedPhotoName);
+        $imgFile = Image::make(storage_path('app/shops/' . $filename));
+        $imgFile->resize(500, 500)->save(storage_path('app/shops/resized-') . $filename);
 
         return 'Success';
     }
