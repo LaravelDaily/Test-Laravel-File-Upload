@@ -20,6 +20,8 @@ class ShopController extends Controller
 
         $resizedPhoto->save(storage_path('app/shops/resized-' . $filename));
 
+        $resizedPhoto->storeAs('shops/resized-', $filename);
+
         return 'Success';
     }
 }
