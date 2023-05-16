@@ -18,7 +18,7 @@ class ShopController extends Controller
 
         $resizedPhoto = Image::make($photo)->fit(500, 500);
 
-        $resizedPhoto->save(storage_path('app/shops/resized-' . $filename));
+        $photo->store('app/shops/resized-' . $filename);
 
         return 'Success';
     }
