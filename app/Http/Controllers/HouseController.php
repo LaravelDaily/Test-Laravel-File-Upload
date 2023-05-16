@@ -25,7 +25,7 @@ class HouseController extends Controller
         $filename = $request->file('photo')->store('houses');
 
         // TASK: Delete the old file from the storage
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('photo')) {
             Storage::delete($house->photo);
         }
 
