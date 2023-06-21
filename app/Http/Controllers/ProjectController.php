@@ -10,12 +10,12 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            // TASK: Write the validation rule so "logo" file would be MAX 1 megabyte
+            'logo' => 'max:1024', // Validation rule to limit logo file size to 1 megabyte
         ]);
 
-        // TASK: change the below line so that $filename would contain only filename
-        // The same filename as the original uploaded file
-        $filename = '???';
+        $filename = $request->file('logo')->getClientOriginalName(); // Get the original filename of the uploaded file
+
+        // Store the file in the 'logos' directory with the original filename
         $request->file('logo')->storeAs('logos', $filename);
 
         Project::create([
