@@ -11,7 +11,7 @@ class OfficeController extends Controller
     {
         $filename = $request->file('photo')->getClientOriginalName();
 
-        $request->file('photo')->storePubliclyAs('offices', $filename);
+        $request->file('photo')->storeAs('public/offices/', $filename);
 
         Office::create([
             'name' => $request->name,
