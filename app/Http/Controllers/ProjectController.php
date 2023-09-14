@@ -11,7 +11,7 @@ class ProjectController extends Controller
     {
         $request->validate([
             // TASK: Write the validation rule so "logo" file would be MAX 1 megabyte
-            'logo'=>'file|size:1024'
+            'logo'=>'file|max:1024'
         ]);
 
         // TASK: change the below line so that $filename would contain only filename
