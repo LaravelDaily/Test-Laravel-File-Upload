@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\Company;
 use App\Models\House;
 use App\Models\Office;
-use App\Models\Project;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
