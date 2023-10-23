@@ -23,9 +23,10 @@ class HouseController extends Controller
     public function update(Request $request, House $house)
     {
         $filename = $request->file('photo')->store('houses');
-
         // TASK: Delete the old file from the storage
-        Storage::delete($filename);
+        if (Storage::exists($filename)) {
+            Storage::delete($filename);
+        }
 
         $house->update([
             'name' => $request->name,
@@ -39,6 +40,11 @@ class HouseController extends Controller
     {
         // TASK: Return the $house->photo file from "storage/app/houses" folder
         // for download in browser
-        return response()->download('storage/app/houses', $house->photo);
+        return response()->download(storage_path('app/' . $house->photo));
+    }
+
+    public function show(House $house)
+    {
+        return view('houses.show', compact('house'));
     }
 }
