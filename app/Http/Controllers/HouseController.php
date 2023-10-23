@@ -26,7 +26,6 @@ class HouseController extends Controller
         // TASK: Delete the old file from the storage
         if (Storage::exists($filename)) {
             Storage::delete(storage_path('app/houses') . $filename);
-            unlink(storage_path('app/houses') . $filename);
         }
 
         $house->update([
