@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\File;
 
 class ProjectController extends Controller
 {
@@ -15,7 +16,7 @@ class ProjectController extends Controller
 
         // TASK: change the below line so that $filename would contain only filename
         // The same filename as the original uploaded file
-        $filename = '???';
+        $filename = $request->logo->name;
         $request->file('logo')->storeAs('logos', $filename);
 
         Project::create([
