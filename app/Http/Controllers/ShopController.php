@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 class ShopController extends Controller
@@ -15,6 +16,9 @@ class ShopController extends Controller
         // TASK: resize the uploaded image from /storage/app/shops/$filename
         //   to size of 500x500 and store it as /storage/app/shops/resized-$filename
         // Use intervention/image package, it's already pre-installed for you
+        $img = Image::make(Storage::get('shops'.'/'.$filename));
+        $img->resize(500,500);
+        $img->save(Storage::path('shops'). '/' . 'resized-'.$filename);
 
         return 'Success';
     }
