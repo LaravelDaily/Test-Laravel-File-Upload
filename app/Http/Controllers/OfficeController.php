@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Office;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class OfficeController extends Controller
 {
@@ -14,6 +15,10 @@ class OfficeController extends Controller
         // TASK: Upload the file "photo" so it would be written as
         //   storage/app/public/offices/[original_filename]
 
+        if (!file_exists(storage_path('app/public'). '/' . 'offices')) {
+            Storage::disk('public')->makeDirectory('/offices');
+        }
+        Storage::disk('public')->put('offices' . '/' . $filename , $request->file('photo'));
         Office::create([
             'name' => $request->name,
             'photo' => $filename,
