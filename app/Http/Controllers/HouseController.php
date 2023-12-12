@@ -38,5 +38,6 @@ class HouseController extends Controller
     {
         // TASK: Return the $house->photo file from "storage/app/houses" folder
         // for download in browser
+         return \Illuminate\Support\Facades\Response::download(Storage::path($house->photo));
     }
 }
