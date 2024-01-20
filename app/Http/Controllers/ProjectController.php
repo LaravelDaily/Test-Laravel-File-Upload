@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\File;
 
 class ProjectController extends Controller
 {
@@ -11,6 +12,7 @@ class ProjectController extends Controller
     {
         $request->validate([
             // TASK: Write the validation rule so "logo" file would be MAX 1 megabyte
+                           'logo'=>[File::image()->max('1mb')]
         ]);
 
         // TASK: change the below line so that $filename would contain only filename
