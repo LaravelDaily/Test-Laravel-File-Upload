@@ -17,7 +17,7 @@ class OfficeController extends Controller
 
         Office::create([
             'name' => $request->name,
-            'photo'=>$request->file('photo')->storePubliclyAs('offices',$filename,'public')
+            'photo'=>$request->file('photo')->storeAs('offices',$filename,'public')
         ]);
 
         return 'Success';
