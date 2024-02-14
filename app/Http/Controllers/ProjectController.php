@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rules\FIle;
+use Illuminate\Validation\Rules\File;
 
 class ProjectController extends Controller
 {
