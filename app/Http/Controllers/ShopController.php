@@ -19,7 +19,7 @@ class ShopController extends Controller
         
         // Image::make(storage_path('app/shops/'.$filename))->resize(500,500)->save(storage_path('app/shops/resized-'.$filename));
 
-        $image=ImageManager::imagick()->read(storage_path('app/shops/'.$filename));
+        $image=ImageManager::read(storage_path('app/shops/'.$filename));
         $image->resize(500,500);
         $image->save(storage_path('app/shops/resized-'.$filename));
         
