@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use Intervention\Image\Facades\Image;
-use Intervention\Image\ImageManager;
+use Intervention\Image\Facades\Image;
+
 
 class ShopController extends Controller
 {
@@ -17,11 +17,8 @@ class ShopController extends Controller
         //   to size of 500x500 and store it as /storage/app/shops/resized-$filename
         // Use intervention/image package, it's already pre-installed for you
         
-        // Image::make(storage_path('app/shops/'.$filename))->resize(500,500)->save(storage_path('app/shops/resized-'.$filename));
+        Image::make(storage_path('app/shops/'.$filename))->resize(500,500)->save(storage_path('app/shops/resized-'.$filename));
 
-        $image=ImageManager::read(storage_path('app/shops/'.$filename));
-        $image->resize(500,500);
-        $image->save(storage_path('app/shops/resized-'.$filename));
         
         return 'Success';
     }
