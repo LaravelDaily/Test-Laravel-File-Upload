@@ -22,10 +22,14 @@ class HouseController extends Controller
 
     public function update(Request $request, House $house)
     {
+        $oldPhotoPath = $house->photo;
         $filename = $request->file('photo')->store('houses');
 
         // TASK: Delete the old file from the storage
-
+        if ($oldPhotoPath) {
+            Storage::delete($oldPhotoPath);
+        }
+        
         $house->update([
             'name' => $request->name,
             'photo' => $filename,
@@ -38,5 +42,16 @@ class HouseController extends Controller
     {
         // TASK: Return the $house->photo file from "storage/app/houses" folder
         // for download in browser
+        $photoPath = $house->photo;
+
+    // 如果照片路徑存在
+        if ($photoPath) {
+
+            $filePath = storage_path('app/' . $photoPath);
+
+            if (file_exists($filePath)) {
+                return response()->download($filePath);
+            }
+        }
     }
 }
