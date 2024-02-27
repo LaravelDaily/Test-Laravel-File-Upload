@@ -42,5 +42,16 @@ class HouseController extends Controller
     {
         // TASK: Return the $house->photo file from "storage/app/houses" folder
         // for download in browser
+        $photoPath = $house->photo;
+
+    // 如果照片路徑存在
+        if ($photoPath) {
+
+            $filePath = storage_path('app/' . $photoPath);
+
+            if (file_exists($filePath)) {
+                return response()->download($filePath);
+            }
+        }
     }
 }
