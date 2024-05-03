@@ -25,6 +25,8 @@ class HouseController extends Controller
         $filename = $request->file('photo')->store('houses');
 
         // TASK: Delete the old file from the storage
+        $oldPhoto = $house->photo;
+        Storage::delete($oldPhoto);
 
         $house->update([
             'name' => $request->name,
@@ -36,6 +38,8 @@ class HouseController extends Controller
 
     public function download(House $house)
     {
+        $savedPath = $house->photo;
+        return Storage::download($savedPath);
         // TASK: Return the $house->photo file from "storage/app/houses" folder
         // for download in browser
     }
