@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5986f4b511cd9b94b42fa514e7f64489",
+    "content-hash": "5438e74699595d27b9089ca1457669bc",
     "packages": [
         {
             "name": "brick/math",
@@ -3358,16 +3358,16 @@
         },
         {
             "name": "spatie/laravel-medialibrary",
-            "version": "10.7.11",
+            "version": "10.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-medialibrary.git",
-                "reference": "a6d562d2226c2b339db8299a3a02bacd031edabf"
+                "reference": "8a00a55ebbf6afc8c1f01c09bb3ee91f67a7f567"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/a6d562d2226c2b339db8299a3a02bacd031edabf",
-                "reference": "a6d562d2226c2b339db8299a3a02bacd031edabf",
+                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/8a00a55ebbf6afc8c1f01c09bb3ee91f67a7f567",
+                "reference": "8a00a55ebbf6afc8c1f01c09bb3ee91f67a7f567",
                 "shasum": ""
             },
             "require": {
@@ -3375,12 +3375,13 @@
                 "ext-fileinfo": "*",
                 "ext-json": "*",
                 "illuminate/bus": "^9.18|^10.0",
+                "illuminate/conditionable": "^9.18|^10.0",
                 "illuminate/console": "^9.18|^10.0",
                 "illuminate/database": "^9.18|^10.0",
                 "illuminate/pipeline": "^9.18|^10.0",
                 "illuminate/support": "^9.18|^10.0",
                 "intervention/image": "^2.7",
-                "maennchen/zipstream-php": "^2.0",
+                "maennchen/zipstream-php": "^2.0|^3.0",
                 "php": "^8.0",
                 "spatie/image": "^2.2.2",
                 "spatie/temporary-directory": "^2.0",
@@ -3409,7 +3410,7 @@
             "suggest": {
                 "league/flysystem-aws-s3-v3": "Required to use AWS S3 file storage",
                 "php-ffmpeg/php-ffmpeg": "Required for generating video thumbnails",
-                "spatie/pdf-to-image": "Required for generating thumbsnails of PDFs and SVGs"
+                "spatie/pdf-to-image": "Required for generating thumbnails of PDFs and SVGs"
             },
             "type": "library",
             "extra": {
@@ -3450,7 +3451,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-medialibrary/issues",
-                "source": "https://github.com/spatie/laravel-medialibrary/tree/10.7.11"
+                "source": "https://github.com/spatie/laravel-medialibrary/tree/10.10.2"
             },
             "funding": [
                 {
@@ -3462,7 +3463,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-17T08:44:20+00:00"
+            "time": "2023-07-24T13:27:13+00:00"
         },
         {
             "name": "spatie/temporary-directory",
@@ -8396,5 +8397,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
