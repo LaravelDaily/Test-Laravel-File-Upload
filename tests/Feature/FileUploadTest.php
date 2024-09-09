@@ -16,7 +16,6 @@ use Tests\TestCase;
 class FileUploadTest extends TestCase
 {
     use RefreshDatabase;
-
     public function test_original_filename_upload()
     {
         $filename = 'logo.jpg';
@@ -73,7 +72,6 @@ class FileUploadTest extends TestCase
             'photo' => UploadedFile::fake()->image('photo.jpg')
         ]);
         $house = House::first();
-
         $response = $this->get('houses/download/' . $house->id);
         $response->assertStatus(200);
         $response->assertDownload(str_replace('houses/', '', $house->photo));
@@ -91,39 +89,39 @@ class FileUploadTest extends TestCase
 
         $this->assertTrue(Storage::disk('public')->exists('offices/' . $filename));
 
+
         $response = $this->get('offices/' . $office->id);
         $response->assertStatus(200);
         $response->assertSee(public_path('offices/' . $filename));
     }
 
-    public function test_upload_resize()
-    {
-        $filename = Str::random(8) . '.jpg';
+        public function test_upload_resize()
+        {
+            $filename = Str::random(8) . '.jpg';
 
-        $response = $this->post('shops', [
-            'name' => 'Some name',
-            'photo' => UploadedFile::fake()->image($filename, 1000, 1000)
-        ]);
-        $response->assertStatus(200);
+            $response = $this->post('shops', [
+                'name' => 'Some name',
+                'photo' => UploadedFile::fake()->image($filename, 1000, 1000)
+            ]);
+            $response->assertStatus(200);
 
-        $image = Image::make(storage_path('app/shops/resized-' . $filename));
-        $this->assertEquals(500, $image->width());
-        $this->assertEquals(500, $image->height());
-    }
+            $image = Image::make(storage_path('app/shops/resized-' . $filename));
+            $this->assertEquals(500, $image->width());
+            $this->assertEquals(500, $image->height());
+        }
+        public function test_spatie_media_library()
+        {
+            $filename = Str::random(8) . '.jpg';
 
-    public function test_spatie_media_library()
-    {
-        $filename = Str::random(8) . '.jpg';
+            $response = $this->post('companies', [
+                'name' => 'Some name',
+                'photo' => UploadedFile::fake()->image($filename)
+            ]);
+            $response->assertStatus(200);
 
-        $response = $this->post('companies', [
-            'name' => 'Some name',
-            'photo' => UploadedFile::fake()->image($filename)
-        ]);
-        $response->assertStatus(200);
-
-        $company = Company::first();
-        $response = $this->get('companies/' . $company->id);
-        $response->assertStatus(200);
-        $response->assertSee('storage/' . $company->id . '/' . $filename);
-    }
+            $company = Company::first();
+            $response = $this->get('companies/' . $company->id);
+            $response->assertStatus(200);
+            $response->assertSee('storage/' . $company->id . '/' . $filename);
+        }
 }
