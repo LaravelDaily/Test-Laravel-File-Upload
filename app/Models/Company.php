@@ -12,4 +12,8 @@ class Company extends Model implements HasMedia
     use HasFactory, InteractsWithMedia;
 
     protected $fillable = ['name'];
+
+    public static function last() {
+        return static::all()->last();
+    }
 }

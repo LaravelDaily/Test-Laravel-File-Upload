@@ -15,7 +15,7 @@ use Tests\TestCase;
 
 class FileUploadTest extends TestCase
 {
-    use RefreshDatabase;
+use RefreshDatabase;
 
     public function test_original_filename_upload()
     {
