@@ -26,6 +26,10 @@ class HouseController extends Controller
 
         // TASK: Delete the old file from the storage
 
+        // حذف الملف القديم من التخزين
+
+        Storage::delete($house->photo);
+
         $house->update([
             'name' => $request->name,
             'photo' => $filename,
@@ -38,5 +42,15 @@ class HouseController extends Controller
     {
         // TASK: Return the $house->photo file from "storage/app/houses" folder
         // for download in browser
+        $filePath = 'houses/' . $house->photo;
+
+        // التحقق إذا كان الملف موجودًا
+        if (Storage::exists($filePath)) {
+            // إرجاع الملف ليتم تحميله عبر المتصفح
+            return Storage::download($filePath);
+        }
+
+        // إذا لم يكن الملف موجودًا، إرجاع خطأ 404
+        return abort(404, 'File not found');
     }
 }

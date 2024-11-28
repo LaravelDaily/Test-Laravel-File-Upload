@@ -9,14 +9,21 @@ class OfficeController extends Controller
 {
     public function store(Request $request)
     {
+        // التحقق من وجود الملف في الطلب
+        $request->validate([
+            'photo' => 'required|file|max:1024', // التحقق من أن الملف موجود ولا يتجاوز 1 ميجابايت
+        ]);
+
+        // الحصول على اسم الملف الأصلي
         $filename = $request->file('photo')->getClientOriginalName();
 
-        // TASK: Upload the file "photo" so it would be written as
-        //   storage/app/public/offices/[original_filename]
+        // رفع الملف إلى المجلد 'public/offices' وتخزينه مع الاسم الأصلي
+        $path = $request->file('photo')->storeAs('public/offices', $filename);
 
+        // إنشاء السجل الجديد في قاعدة البيانات
         Office::create([
             'name' => $request->name,
-            'photo' => $filename,
+            'photo' => $filename,  // حفظ اسم الملف في قاعدة البيانات
         ]);
 
         return 'Success';
@@ -26,5 +33,4 @@ class OfficeController extends Controller
     {
         return view('offices.show', compact('office'));
     }
-
 }
